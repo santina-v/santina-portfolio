@@ -5,12 +5,19 @@ const skills = [
   "Java",
   "C++",
   "SQL",
+  "JavaScript",
+  "React",
   "Machine Learning",
   "Data Science",
+  "Data Analysis",
+  "Deep Learning",
   "Spring Boot",
+  "REST API",
   "MySQL",
   "MongoDB",
-  "JavaScript",
+  "Ollama",
+  "Streamlit",
+  "Git",
 ];
 
 const projects = [
