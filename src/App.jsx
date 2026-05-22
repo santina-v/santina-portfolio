@@ -15,20 +15,61 @@ const skills = [
 
 const projects = [
   {
+    title: "NEXUS AI — Offline Intelligent Desktop Assistant",
+    text: "Built a fully offline AI-powered desktop assistant using Python, Ollama, and CustomTkinter. It includes conversational AI, desktop automation, document summarization, screenshots/browser control, PDF/TXT analysis, real-time system monitoring, and live web-search enhancements.",
+    tech: [
+      "Python",
+      "Ollama",
+      "Llama3",
+      "Phi3",
+      "CustomTkinter",
+      "PyAutoGUI",
+      "PyMuPDF",
+      "BeautifulSoup",
+      "Requests",
+      "Desktop Automation",
+      "AI Integration",
+    ],
+  },
+  {
     title: "VisionGuard Pro",
-    text: "AI vs Real Image Detection System using EfficientNet-B0, transfer learning, Streamlit, GitHub, and Streamlit Cloud.",
+    text: "AI vs Real Image Detection System that classifies real and AI-generated images with around 95% accuracy using EfficientNet-B0 and transfer learning. Built a Streamlit app for real-time prediction and deployed it using Streamlit Cloud and GitHub.",
+    tech: [
+      "Python",
+      "EfficientNet-B0",
+      "Transfer Learning",
+      "Machine Learning",
+      "Streamlit",
+      "Image Classification",
+      "GitHub",
+      "Streamlit Cloud",
+    ],
   },
   {
     title: "Backend Framework Application",
-    text: "REST APIs using Spring Boot, Java, MySQL, layered architecture, and JWT authentication.",
+    text: "Built REST APIs using Spring Boot, Java, and MySQL. Implemented layered architecture and JWT authentication for secure backend application development.",
+    tech: [
+      "Java",
+      "Spring Boot",
+      "REST API",
+      "MySQL",
+      "JWT Authentication",
+      "Layered Architecture",
+      "Backend Development",
+    ],
   },
   {
     title: "Impact of AI Tools on Students",
-    text: "Data analysis using R: cleaning, visualization, regression, and academic performance insights.",
-  },
-    {
-    title: "NEXUS AI — Offline Intelligent Desktop Assistant",
-    text: "Built a fully offline AI-powered desktop assistant using Python, Ollama, and CustomTkinter. It includes conversational AI, desktop automation, document summarization, screenshots/browser control, PDF/TXT analysis, real-time system monitoring, and live web-search enhancements.",
+    text: "Performed data analysis to study the impact of AI tools on students' academic performance using cleaning, visualization, and regression techniques.",
+    tech: [
+      "R",
+      "Data Analysis",
+      "Data Cleaning",
+      "Data Visualization",
+      "Regression",
+      "Academic Research",
+      "Statistics",
+    ],
   },
 ];
 
@@ -163,13 +204,25 @@ function Home() {
   );
 }
 
+
 function About() {
   return (
     <Layout>
       <Card title="About Me">
-        I am an AI and Data Science undergraduate passionate about building
-        AI-driven solutions and applying data science techniques to real-world
-        problems.
+        <p>
+          I am Santina V, an Artificial Intelligence and Data Science
+          undergraduate at Sri Krishna College of Engineering and Technology,
+          Coimbatore. I am passionate about machine learning, data analytics,
+          backend development, and building AI-powered solutions for real-world
+          problems.
+        </p>
+
+        <p className="mt-4">
+          I have worked on projects involving offline AI assistants, image
+          classification, REST APIs, document analysis, automation, and
+          data-driven research. My goal is to grow as a Machine Learning
+          Engineer and create useful, scalable, and impactful technology.
+        </p>
       </Card>
     </Layout>
   );
@@ -188,15 +241,33 @@ function Education() {
   );
 }
 
+
 function Projects() {
   return (
     <Layout>
       <Card title="Projects">
         <div className="grid gap-5">
           {projects.map((project) => (
-            <article key={project.title} className="rounded-2xl border border-pink-100 bg-white p-5 shadow-sm">
-              <h3 className="text-xl font-black">{project.title}</h3>
+            <article
+              key={project.title}
+              className="rounded-2xl border border-pink-100 bg-white p-5 shadow-sm"
+            >
+              <h3 className="text-xl font-black text-slate-950">
+                {project.title}
+              </h3>
+
               <p className="mt-2">{project.text}</p>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {project.tech.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full border border-pink-100 bg-pink-50 px-3 py-1 text-sm font-bold text-pink-700"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
             </article>
           ))}
         </div>
