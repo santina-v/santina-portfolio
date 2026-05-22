@@ -204,7 +204,6 @@ function Home() {
   );
 }
 
-
 function About() {
   return (
     <Layout>
@@ -213,20 +212,28 @@ function About() {
           I am Santina V, an Artificial Intelligence and Data Science
           undergraduate at Sri Krishna College of Engineering and Technology,
           Coimbatore. I am passionate about machine learning, data analytics,
-          backend development, and building AI-powered solutions for real-world
-          problems.
+          backend development, and building intelligent applications that solve
+          real-world problems.
         </p>
 
         <p className="mt-4">
-          I have worked on projects involving offline AI assistants, image
-          classification, REST APIs, document analysis, automation, and
-          data-driven research. My goal is to grow as a Machine Learning
-          Engineer and create useful, scalable, and impactful technology.
+          My work focuses on combining AI models, clean backend systems, and
+          user-friendly applications. I have built projects involving image
+          classification, offline AI assistants, REST API development, document
+          analysis, automation, and data-driven research.
+        </p>
+
+        <p className="mt-4">
+          I enjoy learning modern technologies and turning ideas into practical
+          solutions. My goal is to grow as a Machine Learning Engineer and
+          contribute to impactful AI products that are useful, scalable, and
+          accessible.
         </p>
       </Card>
     </Layout>
   );
 }
+
 
 function Education() {
   return (
