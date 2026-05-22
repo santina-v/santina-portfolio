@@ -26,6 +26,10 @@ const projects = [
     title: "Impact of AI Tools on Students",
     text: "Data analysis using R: cleaning, visualization, regression, and academic performance insights.",
   },
+    {
+    title: "NEXUS AI — Offline Intelligent Desktop Assistant",
+    text: "Built a fully offline AI-powered desktop assistant using Python, Ollama, and CustomTkinter. It includes conversational AI, desktop automation, document summarization, screenshots/browser control, PDF/TXT analysis, real-time system monitoring, and live web-search enhancements.",
+  },
 ];
 
 function speakIntro() {
