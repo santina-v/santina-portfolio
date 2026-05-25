@@ -259,7 +259,7 @@ function Home() {
             <div className="absolute -inset-8 rounded-[44px] bg-rose-200/40 blur-3xl" />
             <div className="relative rounded-[36px] border border-white bg-white p-4 shadow-2xl">
               <img
-                src="/profile.jpeg"
+                src="/Profile.png"
                 alt="Santina V profile"
                 className="h-80 w-72 rounded-[28px] object-cover md:h-[430px] md:w-[360px]"
               />
