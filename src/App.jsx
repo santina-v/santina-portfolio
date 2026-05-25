@@ -81,13 +81,40 @@ const projects = [
 ];
 
 function speakIntro() {
-  const speech = new SpeechSynthesisUtterance(
-    "Hi, I am Santina V, an aspiring Machine Learning Engineer and AI Data Science undergraduate."
-  );
+  const text =
+    "Hi, I am Santina V, an aspiring Machine Learning Engineer and Artificial Intelligence and Data Science undergraduate.";
+
+  const speech = new SpeechSynthesisUtterance(text);
   speech.lang = "en-IN";
+  speech.pitch = 1.2;
+  speech.rate = 0.95;
+
+  const voices = window.speechSynthesis.getVoices();
+
+  const femaleVoice =
+    voices.find((voice) =>
+      voice.name.toLowerCase().includes("female")
+    ) ||
+    voices.find((voice) =>
+      voice.name.toLowerCase().includes("zira")
+    ) ||
+    voices.find((voice) =>
+      voice.name.toLowerCase().includes("samantha")
+    ) ||
+    voices.find((voice) =>
+      voice.name.toLowerCase().includes("google uk english female")
+    ) ||
+    voices.find((voice) =>
+      voice.lang.includes("en")
+    );
+
+  if (femaleVoice) {
+    speech.voice = femaleVoice;
+  }
+
+  window.speechSynthesis.cancel();
   window.speechSynthesis.speak(speech);
 }
-
 function Layout({ children }) {
   return (
     <main className="min-h-screen bg-[#fff7fb] text-slate-900">
