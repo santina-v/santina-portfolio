@@ -84,37 +84,41 @@ function speakIntro() {
   const text =
     "Hi, I am Santina V, an aspiring Machine Learning Engineer and Artificial Intelligence and Data Science undergraduate.";
 
-  const speech = new SpeechSynthesisUtterance(text);
-  speech.lang = "en-IN";
-  speech.pitch = 1.2;
-  speech.rate = 0.95;
+  function speakWithVoice() {
+    const voices = window.speechSynthesis.getVoices();
+
+    const preferredVoice =
+      voices.find((voice) => voice.name.toLowerCase().includes("zira")) ||
+      voices.find((voice) => voice.name.toLowerCase().includes("samantha")) ||
+      voices.find((voice) => voice.name.toLowerCase().includes("female")) ||
+      voices.find((voice) => voice.name.toLowerCase().includes("google uk english female")) ||
+      voices.find((voice) => voice.name.toLowerCase().includes("google us english")) ||
+      voices.find((voice) => voice.lang === "en-IN") ||
+      voices.find((voice) => voice.lang.startsWith("en"));
+
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "en-IN";
+    speech.pitch = 1.35;
+    speech.rate = 0.92;
+    speech.volume = 1;
+
+    if (preferredVoice) {
+      speech.voice = preferredVoice;
+    }
+
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(speech);
+  }
 
   const voices = window.speechSynthesis.getVoices();
 
-  const femaleVoice =
-    voices.find((voice) =>
-      voice.name.toLowerCase().includes("female")
-    ) ||
-    voices.find((voice) =>
-      voice.name.toLowerCase().includes("zira")
-    ) ||
-    voices.find((voice) =>
-      voice.name.toLowerCase().includes("samantha")
-    ) ||
-    voices.find((voice) =>
-      voice.name.toLowerCase().includes("google uk english female")
-    ) ||
-    voices.find((voice) =>
-      voice.lang.includes("en")
-    );
-
-  if (femaleVoice) {
-    speech.voice = femaleVoice;
+  if (voices.length === 0) {
+    window.speechSynthesis.onvoiceschanged = speakWithVoice;
+  } else {
+    speakWithVoice();
   }
-
-  window.speechSynthesis.cancel();
-  window.speechSynthesis.speak(speech);
 }
+
 function Layout({ children }) {
   return (
     <main className="min-h-screen bg-[#fff7fb] text-slate-900">
