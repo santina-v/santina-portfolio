@@ -1,4 +1,13 @@
-import { BrowserRouter, Link, NavLink, Route, Routes } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import {
+  BrowserRouter,
+  Link,
+  NavLink,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
 const skills = [
   "Python",
@@ -89,6 +98,48 @@ const navLinks = [
 ];
 
 const resumeUrl = "/Santina-V-Resume.pdf";
+
+function ScrollPageNavigator() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const lastNavigationTime = useRef(0);
+
+  useEffect(() => {
+    function handleWheel(event) {
+      const now = Date.now();
+
+      if (Math.abs(event.deltaY) < 45 || now - lastNavigationTime.current < 900) {
+        return;
+      }
+
+      const currentIndex = navLinks.findIndex(
+        (link) => link.to === location.pathname
+      );
+
+      if (currentIndex === -1) {
+        return;
+      }
+
+      const nextIndex =
+        event.deltaY > 0
+          ? Math.min(currentIndex + 1, navLinks.length - 1)
+          : Math.max(currentIndex - 1, 0);
+
+      if (nextIndex !== currentIndex) {
+        lastNavigationTime.current = now;
+        navigate(navLinks[nextIndex].to);
+      }
+    }
+
+    window.addEventListener("wheel", handleWheel, { passive: true });
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+    };
+  }, [location.pathname, navigate]);
+
+  return null;
+}
 
 function speakIntro() {
   const text =
@@ -423,7 +474,7 @@ function Resume() {
                 rel="noreferrer"
                 className="rounded-full border border-rose-200 bg-white px-6 py-3 text-base font-black text-rose-700 hover:-translate-y-1 hover:bg-rose-50"
               >
-                Open Resume
+                View Resume
               </a>
             </div>
           </div>
@@ -456,6 +507,25 @@ function Resume() {
               </p>
             </div>
           </div>
+        </div>
+
+        <div className="mt-8 overflow-hidden rounded-2xl border border-rose-100 bg-[#fbf7f9] shadow-inner">
+          <div className="flex items-center justify-between border-b border-rose-100 bg-white px-5 py-4">
+            <p className="font-black text-slate-950">Resume Preview</p>
+            <a
+              href={resumeUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="text-sm font-black text-rose-700 hover:text-slate-950"
+            >
+              Open in new tab
+            </a>
+          </div>
+          <iframe
+            src={resumeUrl}
+            title="Santina V Resume Preview"
+            className="h-[70vh] w-full bg-white"
+          />
         </div>
       </Card>
     </Layout>
@@ -506,6 +576,7 @@ function Contact() {
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollPageNavigator />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
