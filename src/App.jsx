@@ -130,14 +130,18 @@ function ScrollPageNavigator() {
 
       if (nextIndex !== currentIndex) {
         event.preventDefault();
+        const direction = event.deltaY > 0 ? "down" : "up";
         lastNavigationTime.current = now;
+        document.documentElement.dataset.pageDirection = direction;
 
         if (document.startViewTransition) {
           document.startViewTransition(() => {
             navigate(navLinks[nextIndex].to);
+            window.scrollTo({ top: 0, left: 0, behavior: "instant" });
           });
         } else {
           navigate(navLinks[nextIndex].to);
+          window.scrollTo({ top: 0, left: 0, behavior: "instant" });
         }
       }
     }
@@ -492,7 +496,7 @@ function Resume() {
                 rel="noreferrer"
                 className="rounded-full border border-rose-200 bg-white px-6 py-3 text-base font-black text-rose-700 hover:-translate-y-1 hover:bg-rose-50"
               >
-                View Resume
+                View Without Downloading
               </a>
             </div>
           </div>
@@ -544,6 +548,10 @@ function Resume() {
             title="Santina V Resume Preview"
             className="h-[70vh] w-full bg-white"
           />
+          <div className="border-t border-rose-100 bg-white px-5 py-3 text-sm font-semibold text-slate-500">
+            If the preview does not load in your browser, use View Without
+            Downloading to open the PDF in a new tab.
+          </div>
         </div>
       </Card>
     </Layout>

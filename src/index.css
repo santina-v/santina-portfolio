@@ -8,6 +8,7 @@ body {
   margin: 0;
   background: #fbf7f9;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 a,
@@ -16,22 +17,38 @@ button {
 }
 
 .page-slide {
-  animation: smoothPageEnter 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: smoothPageEnterFromBottom 0.85s cubic-bezier(0.16, 1, 0.3, 1)
+    both;
   view-transition-name: page;
+  min-height: calc(100vh - 72px);
 }
 
-::view-transition-old(page) {
-  animation: smoothPageExit 0.38s cubic-bezier(0.4, 0, 1, 1) both;
-}
-
+::view-transition-old(page),
 ::view-transition-new(page) {
-  animation: smoothPageEnter 0.62s cubic-bezier(0.16, 1, 0.3, 1) both;
+  height: 100%;
+  mix-blend-mode: normal;
 }
 
-@keyframes smoothPageEnter {
+html[data-page-direction="down"]::view-transition-old(page) {
+  animation: slidePageOutUp 0.58s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+html[data-page-direction="down"]::view-transition-new(page) {
+  animation: slidePageInFromBottom 0.78s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+html[data-page-direction="up"]::view-transition-old(page) {
+  animation: slidePageOutDown 0.58s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+html[data-page-direction="up"]::view-transition-new(page) {
+  animation: slidePageInFromTop 0.78s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes smoothPageEnterFromBottom {
   from {
     opacity: 0;
-    transform: translateY(44px) scale(0.985);
+    transform: translateY(60px) scale(0.98);
   }
 
   to {
@@ -40,14 +57,50 @@ button {
   }
 }
 
-@keyframes smoothPageExit {
+@keyframes slidePageInFromBottom {
+  from {
+    opacity: 0.25;
+    transform: translateY(100vh) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slidePageOutUp {
   from {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
 
   to {
-    opacity: 0;
-    transform: translateY(-28px) scale(0.99);
+    opacity: 0.15;
+    transform: translateY(-42vh) scale(0.96);
+  }
+}
+
+@keyframes slidePageInFromTop {
+  from {
+    opacity: 0.25;
+    transform: translateY(-100vh) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slidePageOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0.15;
+    transform: translateY(42vh) scale(0.96);
   }
 }
