@@ -108,7 +108,10 @@ function ScrollPageNavigator() {
     function handleWheel(event) {
       const now = Date.now();
 
-      if (Math.abs(event.deltaY) < 45 || now - lastNavigationTime.current < 900) {
+      if (
+        Math.abs(event.deltaY) < 45 ||
+        now - lastNavigationTime.current < 1000
+      ) {
         return;
       }
 
@@ -126,12 +129,20 @@ function ScrollPageNavigator() {
           : Math.max(currentIndex - 1, 0);
 
       if (nextIndex !== currentIndex) {
+        event.preventDefault();
         lastNavigationTime.current = now;
-        navigate(navLinks[nextIndex].to);
+
+        if (document.startViewTransition) {
+          document.startViewTransition(() => {
+            navigate(navLinks[nextIndex].to);
+          });
+        } else {
+          navigate(navLinks[nextIndex].to);
+        }
       }
     }
 
-    window.addEventListener("wheel", handleWheel, { passive: true });
+    window.addEventListener("wheel", handleWheel, { passive: false });
 
     return () => {
       window.removeEventListener("wheel", handleWheel);
@@ -302,6 +313,13 @@ function Home() {
             >
               Download Resume
             </a>
+
+            <Link
+              to="/resume"
+              className="rounded-full border border-rose-200 bg-rose-50 px-7 py-3 font-black text-rose-700 hover:-translate-y-1 hover:bg-white"
+            >
+              View Resume
+            </Link>
 
             <button
               onClick={speakIntro}
