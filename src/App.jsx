@@ -84,8 +84,11 @@ const navLinks = [
   { to: "/education", label: "Education" },
   { to: "/projects", label: "Projects" },
   { to: "/skills", label: "Skills" },
+  { to: "/resume", label: "Resume" },
   { to: "/contact", label: "Contact" },
 ];
+
+const resumeUrl = "/Santina-V-Resume.pdf";
 
 function speakIntro() {
   const text =
@@ -144,7 +147,7 @@ function Layout({ children }) {
             </span>
           </Link>
 
-          <div className="hidden items-center gap-2 md:flex">
+          <div className="flex max-w-[68vw] items-center gap-2 overflow-x-auto">
             {navLinks.map((link) => (
               <NavLink
                 key={link.to}
@@ -240,6 +243,14 @@ function Home() {
             >
               About Me
             </Link>
+
+            <a
+              href={resumeUrl}
+              download
+              className="rounded-full border border-slate-200 bg-white px-7 py-3 font-black text-slate-700 hover:-translate-y-1 hover:text-rose-700"
+            >
+              Download Resume
+            </a>
 
             <button
               onClick={speakIntro}
@@ -383,6 +394,74 @@ function Skills() {
   );
 }
 
+function Resume() {
+  return (
+    <Layout>
+      <Card title="Resume" eyebrow="Download">
+        <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+          <div className="rounded-2xl border border-rose-100 bg-[#fbf7f9] p-6">
+            <h2 className="text-2xl font-black text-slate-950">
+              Santina V - Machine Learning Engineer Portfolio Resume
+            </h2>
+            <p className="mt-3 text-base leading-7 text-slate-700">
+              Download my resume to view my education, technical skills,
+              projects, certifications, and achievements in a concise PDF
+              format.
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href={resumeUrl}
+                download
+                className="rounded-full bg-slate-950 px-6 py-3 text-base font-black text-white shadow-lg shadow-slate-200 hover:-translate-y-1 hover:bg-rose-700"
+              >
+                Download PDF
+              </a>
+              <a
+                href={resumeUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-rose-200 bg-white px-6 py-3 text-base font-black text-rose-700 hover:-translate-y-1 hover:bg-rose-50"
+              >
+                Open Resume
+              </a>
+            </div>
+          </div>
+
+          <div className="grid gap-4">
+            <div className="rounded-2xl border border-rose-100 bg-white p-5 shadow-sm">
+              <p className="text-sm font-black uppercase tracking-[0.18em] text-rose-600">
+                Focus
+              </p>
+              <p className="mt-2 font-bold text-slate-800">
+                Machine Learning, Data Science, Backend Development
+              </p>
+            </div>
+            <div className="rounded-2xl border border-rose-100 bg-white p-5 shadow-sm">
+              <p className="text-sm font-black uppercase tracking-[0.18em] text-rose-600">
+                Strengths
+              </p>
+              <p className="mt-2 font-bold text-slate-800">
+                AI integration, automation, REST APIs, analytics, and practical
+                project building
+              </p>
+            </div>
+            <div className="rounded-2xl border border-rose-100 bg-white p-5 shadow-sm">
+              <p className="text-sm font-black uppercase tracking-[0.18em] text-rose-600">
+                Availability
+              </p>
+              <p className="mt-2 font-bold text-slate-800">
+                Open to internships, project collaborations, and AI/ML learning
+                opportunities
+              </p>
+            </div>
+          </div>
+        </div>
+      </Card>
+    </Layout>
+  );
+}
+
 function Contact() {
   return (
     <Layout>
@@ -411,6 +490,13 @@ function Contact() {
           <p className="rounded-2xl border border-rose-100 bg-[#fbf7f9] p-5 font-bold text-slate-800">
             Coimbatore, India
           </p>
+          <a
+            href={resumeUrl}
+            download
+            className="rounded-2xl border border-rose-100 bg-[#fbf7f9] p-5 font-bold text-slate-800 hover:border-rose-200 hover:text-rose-700"
+          >
+            Download Resume
+          </a>
         </div>
       </Card>
     </Layout>
@@ -426,6 +512,7 @@ export default function App() {
         <Route path="/education" element={<Education />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/skills" element={<Skills />} />
+        <Route path="/resume" element={<Resume />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>
