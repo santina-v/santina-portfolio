@@ -286,7 +286,7 @@ function Home() {
               <p className="text-sm font-bold text-slate-500">Projects</p>
             </div>
             <div className="rounded-2xl border border-rose-100 bg-[#fbf7f9] p-4">
-              <p className="text-2xl font-black text-slate-950">8.59</p>
+              <p className="text-2xl font-black text-slate-950">8.7</p>
               <p className="text-sm font-bold text-slate-500">CGPA</p>
             </div>
             <div className="rounded-2xl border border-rose-100 bg-[#fbf7f9] p-4">
@@ -401,7 +401,7 @@ function Education() {
               2024 - 2028
             </span>
             <span className="rounded-full bg-white px-4 py-2 text-sm font-bold text-rose-700">
-              CGPA: 8.59
+              CGPA: 8.7
             </span>
           </div>
         </div>
